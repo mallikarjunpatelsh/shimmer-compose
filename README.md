@@ -29,6 +29,9 @@ Add the dependency:
 
 ```kotlin
 implementation("io.github.mallikarjunpatelsh:shimmer-compose:1.0.1")
+// Only if using ShimmerAsyncImage
+implementation("io.coil-kt.coil3:coil-compose:$compatible-version") // Check for latest stable
+implementation("io.coil-kt.coil3:coil-network-okhttp:$compatible-version") // Required for network images
 ```
 
 ## 🚀 Usage
