@@ -7,6 +7,9 @@ plugins {
     id("com.gradleup.nmcp") version "0.0.7"
 }
 
+group = "io.github.mallikarjunpatelsh"
+version = "1.0.1"
+
 android {
     namespace = "com.mallikarjunpatelsh.shimmer"
     compileSdk {
@@ -71,7 +74,7 @@ afterEvaluate {
 
                 groupId = "io.github.mallikarjunpatelsh"
                 artifactId = "shimmer-compose"
-                version = "1.0.0"
+                version = "1.0.1"
 
                 pom {
                     name.set("Shimmer Compose")
