@@ -63,38 +63,40 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            from(components["release"])
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
 
-            groupId = "io.github.mallikarjunpatelsh"
-            artifactId = "shimmer-compose"
-            version = "1.0.0"
+                groupId = "io.github.mallikarjunpatelsh"
+                artifactId = "shimmer-compose"
+                version = "1.0.0"
 
-            pom {
-                name.set("Shimmer Compose")
-                description.set("Shimmer effect for Jetpack Compose")
-                url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
-
-                licenses {
-                    license {
-                        name.set("Apache-2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("mallikarjunpatelsh")
-                        name.set("Mallikarjun Patel")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git://github.com/mallikarjunpatelsh/shimmer-compose.git")
-                    developerConnection.set("scm:git:ssh://github.com/mallikarjunpatelsh/shimmer-compose.git")
+                pom {
+                    name.set("Shimmer Compose")
+                    description.set("Shimmer effect for Jetpack Compose")
                     url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
+
+                    licenses {
+                        license {
+                            name.set("Apache-2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("mallikarjunpatelsh")
+                            name.set("Mallikarjun Patel")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://github.com/mallikarjunpatelsh/shimmer-compose.git")
+                        developerConnection.set("scm:git:ssh://github.com/mallikarjunpatelsh/shimmer-compose.git")
+                        url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
+                    }
                 }
             }
         }
