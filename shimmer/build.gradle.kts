@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.plugin.compose")
     id("maven-publish")
-    id("signing")
+    signing
+    id("com.gradleup.nmcp") version "0.0.7"
 }
 
 android {
@@ -62,55 +63,49 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components["release"])
 
-                groupId = "io.github.mallikarjunpatelsh"
-                artifactId = "shimmer-compose"
-                version = "1.0.0"
+            groupId = "io.github.mallikarjunpatelsh"
+            artifactId = "shimmer-compose"
+            version = "1.0.0"
 
-                pom {
-                    name.set("Shimmer Compose")
-                    description.set("Shimmer effect for Jetpack Compose")
+            pom {
+                name.set("Shimmer Compose")
+                description.set("Shimmer effect for Jetpack Compose")
+                url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
+
+                licenses {
+                    license {
+                        name.set("Apache-2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("mallikarjunpatelsh")
+                        name.set("Mallikarjun Patel")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/mallikarjunpatelsh/shimmer-compose.git")
+                    developerConnection.set("scm:git:ssh://github.com/mallikarjunpatelsh/shimmer-compose.git")
                     url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
-
-                    licenses {
-                        license {
-                            name.set("Apache-2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id.set("mallikarjunpatelsh")
-                            name.set("Mallikarjun Patel")
-                        }
-                    }
-
-                    scm {
-                        connection.set("scm:git:git://github.com/mallikarjunpatelsh/shimmer-compose.git")
-                        developerConnection.set("scm:git:ssh://github.com/mallikarjunpatelsh/shimmer-compose.git")
-                        url.set("https://github.com/mallikarjunpatelsh/shimmer-compose")
-                    }
                 }
             }
         }
+    }
+}
 
-        repositories {
-            maven {
-                name = "OSSRH"
-                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-
-                credentials {
-                    username = System.getenv("SONATYPE_USERNAME")
-                    password = System.getenv("SONATYPE_PASSWORD")
-                }
-            }
-        }
+nmcp {
+    publishAllPublications {
+        username = System.getenv("SONATYPE_USERNAME")
+        password = System.getenv("SONATYPE_PASSWORD")
+        publicationType = "AUTOMATIC"
     }
 }
 

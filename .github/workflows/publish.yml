@@ -1,28 +1,26 @@
-name: Publish
+name: Publish to Maven Central
 
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   # mac not needed for Android
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup JDK
-        uses: actions/setup-java@v3
+      - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Grant execute permission
-        run: chmod +x gradlew
+      - run: chmod +x gradlew
 
-      - name: Publish to Maven Central
-        run: ./gradlew publishReleasePublicationToOSSRHRepository closeAndReleaseStagingRepository
+      - name: Publish
+        run: ./gradlew publishAllPublicationsToCentralPortal
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
